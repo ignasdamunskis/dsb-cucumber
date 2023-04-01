@@ -1,5 +1,5 @@
 const { setWorldConstructor } = require("@cucumber/cucumber");
-const { webkit, devices } = require('playwright');
+const { webkit, devices } = require('@playwright/test');
 
 class CustomWorld {
   constructor(options) {
