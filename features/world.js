@@ -1,22 +1,32 @@
-const { setWorldConstructor } = require("@cucumber/cucumber");
+const { setWorldConstructor, setDefaultTimeout, Before, After } = require("@cucumber/cucumber");
 const { webkit, devices } = require('@playwright/test');
+const DEFAULT_TIMEOUT = 60000; // 60 seconds
 
 class CustomWorld {
   constructor(options) {
     this.baseURL = options.parameters.baseURL
   }
 
-  async openUrl(uri) {
-    const browser = await webkit.launch({
-      // headless: false
+  async init() {
+    this.browser = await webkit.launch({
+      // headless: false,
+      timeout: DEFAULT_TIMEOUT
     });
-    const context = await browser.newContext({
+    const context = await this.browser.newContext({
       baseURL: this.baseURL,
       ...devices['iPhone 12']
     });
     this.page = await context.newPage();
-    await this.page.goto(uri);
   }
 }
 
 setWorldConstructor(CustomWorld);
+setDefaultTimeout(DEFAULT_TIMEOUT);
+
+Before(async function () {
+  await this.init();
+});
+
+After(async function () {
+  await this.browser.close();
+});
