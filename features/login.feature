@@ -1,5 +1,6 @@
 Feature: Login
 
+  @important
   Scenario: Mobile dafabet login
     Given I am on the homepage
     And I am logged out

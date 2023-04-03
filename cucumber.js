@@ -4,6 +4,7 @@ module.exports = {
     format: ['html:cucumber-report.html'],
     worldParameters: {
       baseURL: 'https://als-df-stg.elysium-dfbt.com/m/en'
-    }
+    },
+    publishQuiet: true
   }
 }
