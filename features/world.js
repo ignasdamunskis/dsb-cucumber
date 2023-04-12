@@ -3,17 +3,13 @@ const { webkit, devices } = require('@playwright/test');
 const DEFAULT_TIMEOUT = 60000; // 60 seconds
 
 class CustomWorld {
-  constructor(options) {
-    this.baseURL = options.parameters.baseURL
-  }
-
   async init() {
     this.browser = await webkit.launch({
       // headless: false,
       timeout: DEFAULT_TIMEOUT
     });
     const context = await this.browser.newContext({
-      baseURL: this.baseURL,
+      baseURL: process.env.BASE_URL,
       ...devices['iPhone 12']
     });
     this.page = await context.newPage();

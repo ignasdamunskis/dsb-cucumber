@@ -2,6 +2,7 @@
   "dependencies": {
     "@cucumber/cucumber": "^9.1.0",
     "@playwright/test": "^1.32.1",
+    "dotenv": "^16.0.3",
     "dsb-playwright": "^1.0.0"
   }
 }
